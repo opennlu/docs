@@ -1,72 +1,43 @@
 # Getting Started
 
-## Installation
+OpenNLU is a natural language understanding platform that makes it easy to design and integrate a conversational user interface into your mobile app, web application, device, bot, interactive voice response system, and so on. Using OpenNLU, you can provide new and engaging ways for users to interact with your product.
 
-To install TMI, you need to be using Composer in your project. For more details about Composer, see the [Composer documentation](https://getcomposer.org/doc/).
+OpenNLU can analyze text input from your customers. It can also respond to your customers through text.
 
-```bash
-composer require ghostzero/tmi
-```
+## OpenNLU Console
 
-## Usage
+OpenNLU provides a web user interface called the OpenNLU Console ([open console](https://console.opennlu.net)). You use this console to create, build, and test agents.
 
-After installation you are ready to start using the TMI Client in your PHP application. You can use TMI without or with an OAuth Token. Just follow the examples below:
+In most cases you should use the OpenNLU Console to build agents, but you can also use the OpenNLU API to build agents for advanced scenarios.
 
-### Without OAuth Token
+Many quickstart, concept, and how-to guides take you through the steps of using the console.
 
-:::tip
-Please note that you cannot send any messages without OAuth Token. You can get an OAuth Token with the [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/) (which is one of the best known generators to generate a Twitch OAuth Token).
-:::
+## Training
 
-```php
-use GhostZero\Tmi\Client;
-use GhostZero\Tmi\ClientOptions;
-use GhostZero\Tmi\Events\Twitch\MessageEvent;
+When your agent is trained, OpenNLU uses your training data to build machine learning models specifically for your agent. This training data primarily consists of intents, intent training phrases, and entities referenced in an agent; which are effectively used as machine learning data labels. However, agent models are built using parameter prompt responses, agent settings, and many other pieces of data associated with your agent.
 
-$client = new Client(new ClientOptions([
-    'connection' => [
-        'secure' => true,
-        'reconnect' => true,
-        'rejoin' => true,
-    ],
-    'channels' => ['ghostzero']
-]));
+Whenever you change your agent, you should ensure that the agent is trained before attempting to use it. Depending on your agent settings, training may occur automatically or manually.
 
-$client->on(MessageEvent::class, function (MessageEvent $e) {
-    print "{$e->tags['display-name']}: {$e->message}";
-});
+## Best Practice
 
-$client->connect();
-```
+### Intent Naming
 
-### With OAuth Token
+If your agent has many  [intents](intents.md), you should consider a naming scheme that helps you keep them organized. It is common to segment intent names with punctuation, where the specificity increases from left to right. In addition, an intent name should reflect the end-user's intention for a conversational turn.
 
-```php
-use GhostZero\Tmi\Client;
-use GhostZero\Tmi\ClientOptions;
-use GhostZero\Tmi\Events\Twitch\MessageEvent;
+There are many good naming schemes, but here is one example:
 
-$client = new Client(new ClientOptions([
-    'options' => ['debug' => true],
-    'connection' => [
-        'secure' => true,
-        'reconnect' => true,
-        'rejoin' => true,
-    ],
-    'identity' => [
-        'username' => 'ghostzero',
-        'password' => 'oauth:...',
-    ],
-    'channels' => ['ghostzero']
-]));
+- `phone-service.order.cancel`
+- `phone-service.order.create`
+- `phone-service.order.change`
+- `tv-service.order.cancel`
+- `tv-service.order.create`
+- `tv-service.order.change`
+- `account.balance.get`
+- `account.balance.pay`
+- `account.address.get`
+- `account.address.update`
 
-$client->on(MessageEvent::class, function (MessageEvent $e) use ($client) {
-    if ($e->self) return;
+### Session Client Reuse
 
-    if (strtolower($e->message) === '!hello') {
-        $client->say($e->channel->getName(), "@{$e->user}, heya!");
-    }
-});
+You can improve the performance of your application's detect intent API calls by reusing a SessionsClient client library instance for multiple requests.
 
-$client->connect();
-```

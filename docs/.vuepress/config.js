@@ -2,7 +2,9 @@ module.exports = {
     /**
      * Ref：https://v1.vuepress.vuejs.org/config/#title
      */
-    title: 'TMI.php',
+    title: 'OpenNLU Developers',
+
+    globalLayout: '.vuepress/components/GlobalLayout.vue',
 
     /**
      * Ref：https://v1.vuepress.vuejs.org/config/#description
@@ -33,12 +35,13 @@ module.exports = {
      * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
      */
     themeConfig: {
-        repo: 'ghostzero/tmi-website',
+        repo: 'opennlu/docs',
         editLinks: true,
         docsDir: 'docs',
         docsBranch: 'main',
         editLinkText: 'Help us improve this page!',
         lastUpdated: true,
+        copyright: true,
         nav: [
             {
                 text: 'Documentation',
@@ -48,9 +51,8 @@ module.exports = {
                 text: 'Official Packages',
                 ariaLabel: 'Official Packages Menu',
                 items: [
-                    { text: 'Commander', link: '/docs/commander' },
-                    { text: 'Inspector', link: '/docs/inspector' },
-                    { text: 'TMI Cluster', link: '/docs/tmi-cluster' },
+                    { text: 'PHP Client', link: '/docs/php-client' },
+                    { text: 'Java Client', link: '/docs/java-client' },
                 ]
             },
             {
@@ -59,29 +61,19 @@ module.exports = {
             }
         ],
         sidebar: {
-            '/cloudbot/': [
-                {
-                    title: '[Private] OWN3D Cloudbot',
-                    collapsable: false,
-                    children: [
-                        '',
-                        'auto-mod',
-                        'timers',
-                        'giveaways',
-                        'command-settings',
-                        'custom-commands',
-                        'template-reference',
-                        'all-commands',
-                    ]
-                }
-            ],
             '/docs/': [
                 {
                     title: 'Documentation',
+                    sidebarDepth: 2,
                     collapsable: false,
                     children: [
                         '',
-                        'events',
+                        'agents',
+                        'intents',
+                        'entities',
+                        'actions-and-parameters',
+                        'contexts',
+                        'fulfillment',
                     ]
                 },
                 {
@@ -89,9 +81,8 @@ module.exports = {
                     sidebarDepth: 2,
                     collapsable: false,
                     children: [
-                        'commander',
-                        'inspector',
-                        'tmi-cluster',
+                        'php-client',
+                        'java-client',
                     ]
                 }
             ],

@@ -1,10 +1,9 @@
 <template>
   <div class="landing-page">
     <div class="heading">
-      <h1>TMI.php</h1>
-      <h3>The Twitch Message Interface for PHP 7.4+</h3>
-      <p>Inspired by tmi.js, php-irc-client this package is a full featured, high performance Twitch IRC client written in PHP 7.4.</p>
-      <p>Also have a look at ghostzero/tmi-cluster. TMI Cluster is a Laravel package that makes the PHP TMI client scalable.</p>
+      <h1>OpenNLU</h1>
+      <h3>Open Source Conversational AI</h3>
+      <p>OpenNLU is used to build next-generation bots and assistants that engage in human-like, layered conversations.</p>
 
       <div>
         <a href="/docs/" class="getting-started">
@@ -14,7 +13,9 @@
     </div>
 
     <div class="footer">
-      MIT Licensed | Copyright © 2020-present René Preuß & Contributors
+      Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/" class="footer-link">Creative Commons Attribution 4.0 License</a>,
+      and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="footer-link">Apache 2.0 License</a>.
+      Copyright © 2021-present René Preuß & Contributors
     </div>
   </div>
 </template>
